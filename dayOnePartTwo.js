@@ -1,37 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
-var regex = /\d+|one|two|three|four|five|six|seven|eight|nine/g;
-var wordToNumber = {
-    one: 1,
-    two: 2,
-    three: 3,
-    four: 4,
-    five: 5,
-    six: 6,
-    seven: 7,
-    eight: 8,
-    nine: 9
-};
+var regexLetterDigit = /one|two|three|four|five|six|seven|eight|nine/g;
+// input: cnoneight8rdbdjvjbseight     output: cn1n8ight8rdbdjvjbs8ight
+// const changeNumbers = (str: string): string => {
+//     const changed: string = 
+// };
+var regexDigits = /\d+/g;
+// const wordToNumber: Record<string, number> = {
+//     one: 1,
+//     two: 2,
+//     three: 3,
+//     four: 4,
+//     five: 5,
+//     six: 6,
+//     seven: 7,
+//     eight: 8,
+//     nine: 9
+//   };
 var extractNumbers = function (str) {
-    // const intigers = str.match(regex)?.map((num: string) => {
-    //     if (isNaN(Number(num))) {
-    //         return wordToNumber[num];
-    //     } else {
-    //         return num;
-    //     }
-    // })
-    var match;
-    var intigers = [];
-    while ((match = regex.exec(str)) !== null) {
-        var num = isNaN(Number(match[0])) ? wordToNumber[match[0]] : match[0];
-        // intigers.push(num);
-        if (!isNaN(num)) {
-            intigers.push(num);
-        }
-        var position = match.index + match[0].length;
-        regex.lastIndex = position;
-    }
+    var _a;
+    var intigers = (_a = str.match(regexDigits)) === null || _a === void 0 ? void 0 : _a.map(function (num) {
+        return num;
+    });
     return parseInt(intigers ? intigers.join('') : '');
 };
 var filePath = 'input.txt';
@@ -42,6 +33,7 @@ function processFile(filePath) {
     // console.log(lines);
     for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var line = lines_1[_i];
+        // here will be changeNumbers function to modify line to letter numbers start with their real digit numbers
         var numbers = extractNumbers(line);
         ValuesArr.push(numbers);
     }

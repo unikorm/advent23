@@ -1,39 +1,30 @@
 
 import * as fs from 'fs';
 
-const regex = /\d+|one|two|three|four|five|six|seven|eight|nine/g;
-const wordToNumber: Record<string, number> = {
-    one: 1,
-    two: 2,
-    three: 3,
-    four: 4,
-    five: 5,
-    six: 6,
-    seven: 7,
-    eight: 8,
-    nine: 9
-  };
+const regexLetterDigit: RegExp = /one|two|three|four|five|six|seven|eight|nine/g
+const replacement: Record<string, string> = {
+    "one": "1ne",
+    "two": "2wo",
+    "three": "3hree",
+    "four": "4our",
+    "five": "5ive",
+    "six": "6ix",
+    "seven": "7even",
+    "eight": "8ight",
+    "nine": "9ine"
+};
+// input: cnoneight8rdbdjvjbseight     output: cn1n8ight8rdbdjvjbs8ight
+const changeNumbers = (str: string): string => {
+    const changed: string = 
+};
+
+const regexDigits: RegExp = /\d+/g;
+
 
 const extractNumbers = (str: string): number => {
-    // const intigers = str.match(regex)?.map((num: string) => {
-    //     if (isNaN(Number(num))) {
-    //         return wordToNumber[num];
-    //     } else {
-    //         return num;
-    //     }
-    // })
-    let match;
-    const intigers: number[] = [];
-
-    while ((match = regex.exec(str)) !== null) {
-        const num: number = isNaN(Number(match[0])) ? wordToNumber[match[0]] : match[0];
-        // intigers.push(num);
-        if (!isNaN(num)) {
-            intigers.push(num);
-        }
-        const position: number = match.index + match[0].length;
-        regex.lastIndex = position;
-    }
+    const intigers = str.match(regexDigits)?.map((num: string) => {
+        return num;
+    })
     return parseInt(intigers ? intigers.join('') : '');
 }
 
@@ -57,6 +48,7 @@ function processFile(filePath: string) {
     // console.log(lines);
 
     for (const line of lines) {
+        // here will be changeNumbers function to modify line to letter numbers start with their real digit numbers
         const numbers: number = extractNumbers(line);
         ValuesArr.push(numbers);
     }
