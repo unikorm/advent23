@@ -1,7 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
-var regex = /(\d+|\b(?:one|two|three|four|five|six|seven|eight|nine))/gi;
+var regex = /(?=(\d+)|(?:one|two|three|four|five|six|seven|eight|nine))/g;
+// (?=(\d...|one|two|three|four|five|six|seven|eight...))
+// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}
+// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}|\d+
+// \d+|(?:one|two|three|four|five|six|seven|eight|nine)
+// \d+|\bone\b|\btwo\b|\bthree\b|\bfour\b|\bfive\b|\bsix\b|\bseven\b|\beight\b|\bnine\b
 var wordToNumber = {
     one: 1,
     two: 2,
@@ -30,6 +35,7 @@ var ValuesArr = [];
 function processFile(filePath) {
     var fileContent = fs.readFileSync(filePath, 'utf-8');
     var lines = fileContent.split('\n');
+    // console.log(lines);
     for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var line = lines_1[_i];
         var numbers = extractNumbers(line);

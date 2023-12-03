@@ -1,7 +1,12 @@
 
 import * as fs from 'fs';
 
-const regex = /(\d+|(?:one|two|three|four|five|six|seven|eight|nine))/g;
+const regex = /(?=\d+)(?=(?:one|two|three|four|five|six|seven|eight|nine))/g;
+// (?=(\d...|one|two|three|four|five|six|seven|eight...))
+// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}
+// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}|\d+
+// \d+|(?:one|two|three|four|five|six|seven|eight|nine)
+// \d+|\bone\b|\btwo\b|\bthree\b|\bfour\b|\bfive\b|\bsix\b|\bseven\b|\beight\b|\bnine\b
 
 const wordToNumber = {
     one: 1,
@@ -14,6 +19,7 @@ const wordToNumber = {
     eight: 8,
     nine: 9
   };
+
 
 const extractNumbers = (str: string): number => {  // i need return all the numbers in this function (both the digits and letter numbers)
     const intigers = str.match(regex)?.map((num: string) => {
@@ -31,6 +37,7 @@ const ValuesArr: number[] = []
 function processFile(filePath: string) {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const lines = fileContent.split('\n');
+    // console.log(lines);
 
     for (const line of lines) {
         const numbers: number = extractNumbers(line);
