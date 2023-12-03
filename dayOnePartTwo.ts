@@ -1,10 +1,7 @@
 
-
 import * as fs from 'fs';
 
-
-
-const regex = /(\d+|(?:one|two|three|four|five|six|seven|eight|nine)\b)/g;
+const regex = /(\d+|(?:one|two|three|four|five|six|seven|eight|nine))/g;
 
 const wordToNumber = {
     one: 1,
@@ -29,15 +26,6 @@ const extractNumbers = (str: string): number => {  // i need return all the numb
     return parseInt(intigers ? intigers.join('') : '');
 }
 
-
-
-
-
-
-
-
-
-
 const filePath = 'input.txt';
 const ValuesArr: number[] = []
 function processFile(filePath: string) {
@@ -49,8 +37,6 @@ function processFile(filePath: string) {
         ValuesArr.push(numbers);
     }
 }
-
-
 processFile(filePath);
 
 const againSt: string[] = ValuesArr.map(num => num.toString());
@@ -68,11 +54,9 @@ for (let j = 0; j < againSt.length; j++) {
 }
 
 const finalInt: number[] = againSt.map(num => parseInt(num));
-// const test: number[] = [11, 22, 33, 44];
 let sum: number = 0;
 for (let k = 0; k < finalInt.length; k++) {
     sum = sum + finalInt[k];
 }
-
 
 console.log(ValuesArr, againSt, finalInt, sum);

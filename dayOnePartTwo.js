@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
-var regex = /(\d+|(?:one|two|three|four|five|six|seven|eight|nine)\b)/g;
+var regex = /(\d+|\b(?:one|two|three|four|five|six|seven|eight|nine))/gi;
 var wordToNumber = {
     one: 1,
     two: 2,
@@ -49,7 +49,6 @@ for (var j = 0; j < againSt.length; j++) {
     }
 }
 var finalInt = againSt.map(function (num) { return parseInt(num); });
-// const test: number[] = [11, 22, 33, 44];
 var sum = 0;
 for (var k = 0; k < finalInt.length; k++) {
     sum = sum + finalInt[k];
