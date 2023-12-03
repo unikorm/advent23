@@ -1,12 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
-var regex = /(?=(\d+)|(?:one|two|three|four|five|six|seven|eight|nine))/g;
-// (?=(\d...|one|two|three|four|five|six|seven|eight...))
-// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}
-// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}|\d+
-// \d+|(?:one|two|three|four|five|six|seven|eight|nine)
-// \d+|\bone\b|\btwo\b|\bthree\b|\bfour\b|\bfive\b|\bsix\b|\bseven\b|\beight\b|\bnine\b
+var regex = /\d+|one|two|three|four|five|six|seven|eight|nine/g;
 var wordToNumber = {
     one: 1,
     two: 2,
@@ -19,15 +14,24 @@ var wordToNumber = {
     nine: 9
 };
 var extractNumbers = function (str) {
-    var _a;
-    var intigers = (_a = str.match(regex)) === null || _a === void 0 ? void 0 : _a.map(function (num) {
-        if (isNaN(Number(num))) {
-            return wordToNumber[num];
+    // const intigers = str.match(regex)?.map((num: string) => {
+    //     if (isNaN(Number(num))) {
+    //         return wordToNumber[num];
+    //     } else {
+    //         return num;
+    //     }
+    // })
+    var match;
+    var intigers = [];
+    while ((match = regex.exec(str)) !== null) {
+        var num = isNaN(Number(match[0])) ? wordToNumber[match[0]] : match[0];
+        // intigers.push(num);
+        if (!isNaN(num)) {
+            intigers.push(num);
         }
-        else {
-            return num;
-        }
-    });
+        var position = match.index + match[0].length;
+        regex.lastIndex = position;
+    }
     return parseInt(intigers ? intigers.join('') : '');
 };
 var filePath = 'input.txt';

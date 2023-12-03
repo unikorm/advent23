@@ -1,14 +1,8 @@
 
 import * as fs from 'fs';
 
-const regex = /(?=\d+)(?=(?:one|two|three|four|five|six|seven|eight|nine))/g;
-// (?=(\d...|one|two|three|four|five|six|seven|eight...))
-// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}
-// (?i)(one|two|three|four|five|six|seven|eight|nine){2,}|\d+
-// \d+|(?:one|two|three|four|five|six|seven|eight|nine)
-// \d+|\bone\b|\btwo\b|\bthree\b|\bfour\b|\bfive\b|\bsix\b|\bseven\b|\beight\b|\bnine\b
-
-const wordToNumber = {
+const regex = /\d+|one|two|three|four|five|six|seven|eight|nine/g;
+const wordToNumber: Record<string, number> = {
     one: 1,
     two: 2,
     three: 3,
@@ -20,17 +14,40 @@ const wordToNumber = {
     nine: 9
   };
 
+const extractNumbers = (str: string): number => {
+    // const intigers = str.match(regex)?.map((num: string) => {
+    //     if (isNaN(Number(num))) {
+    //         return wordToNumber[num];
+    //     } else {
+    //         return num;
+    //     }
+    // })
+    let match;
+    const intigers: number[] = [];
 
-const extractNumbers = (str: string): number => {  // i need return all the numbers in this function (both the digits and letter numbers)
-    const intigers = str.match(regex)?.map((num: string) => {
-        if (isNaN(Number(num))) {
-            return wordToNumber[num];
-        } else {
-            return num;
+    while ((match = regex.exec(str)) !== null) {
+        const num: number = isNaN(Number(match[0])) ? wordToNumber[match[0]] : match[0];
+        // intigers.push(num);
+        if (!isNaN(num)) {
+            intigers.push(num);
         }
-    })
+        const position: number = match.index + match[0].length;
+        regex.lastIndex = position;
+    }
     return parseInt(intigers ? intigers.join('') : '');
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 const filePath = 'input.txt';
 const ValuesArr: number[] = []
