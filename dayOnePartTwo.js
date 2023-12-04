@@ -2,22 +2,27 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 var regexLetterDigit = /one|two|three|four|five|six|seven|eight|nine/g;
+var replacement = {
+    "one": "1ne",
+    "two": "2wo",
+    "three": "3hree",
+    "four": "4our",
+    "five": "5ive",
+    "six": "6ix",
+    "seven": "7even",
+    "eight": "8ight",
+    "nine": "9ine"
+};
 // input: cnoneight8rdbdjvjbseight     output: cn1n8ight8rdbdjvjbs8ight
-// const changeNumbers = (str: string): string => {
-//     const changed: string = 
-// };
+var changeNumbers = function (str) {
+    var changed = str.matchAll(regexLetterDigit);
+    for (var _i = 0, changed_1 = changed; _i < changed_1.length; _i++) {
+        var match = changed_1[_i];
+        console.log(match);
+    }
+    return changed;
+};
 var regexDigits = /\d+/g;
-// const wordToNumber: Record<string, number> = {
-//     one: 1,
-//     two: 2,
-//     three: 3,
-//     four: 4,
-//     five: 5,
-//     six: 6,
-//     seven: 7,
-//     eight: 8,
-//     nine: 9
-//   };
 var extractNumbers = function (str) {
     var _a;
     var intigers = (_a = str.match(regexDigits)) === null || _a === void 0 ? void 0 : _a.map(function (num) {
@@ -33,8 +38,8 @@ function processFile(filePath) {
     // console.log(lines);
     for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var line = lines_1[_i];
-        // here will be changeNumbers function to modify line to letter numbers start with their real digit numbers
-        var numbers = extractNumbers(line);
+        var words = changeNumbers(line); // here will be changeNumbers function to modify line to letter numbers start with their real digit numbers
+        var numbers = extractNumbers(words);
         ValuesArr.push(numbers);
     }
 }

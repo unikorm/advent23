@@ -13,9 +13,10 @@ const replacement: Record<string, string> = {
     "eight": "8ight",
     "nine": "9ine"
 };
-// input: cnoneight8rdbdjvjbseight     output: cn1n8ight8rdbdjvjbs8ight
+// input: cnoneight8rdbdjvjbseight     output: cn1n8ight8rdbdjvjbs8ight  now i have: cn1neight8rdbdjvjbs8ight
 const changeNumbers = (str: string): string => {
-    const changed: string = 
+    const changed: string = str.replace(regexLetterDigit, (match) => match = replacement[match]);
+    return changed
 };
 
 const regexDigits: RegExp = /\d+/g;
@@ -48,8 +49,8 @@ function processFile(filePath: string) {
     // console.log(lines);
 
     for (const line of lines) {
-        // here will be changeNumbers function to modify line to letter numbers start with their real digit numbers
-        const numbers: number = extractNumbers(line);
+        const words: string = changeNumbers(line)  // here will be changeNumbers function to modify line to letter numbers start with their real digit numbers
+        const numbers: number = extractNumbers(words);
         ValuesArr.push(numbers);
     }
 }
