@@ -13,13 +13,9 @@ var replacement = {
     "eight": "8ight",
     "nine": "9ine"
 };
-// input: cnoneight8rdbdjvjbseight     output: cn1n8ight8rdbdjvjbs8ight
+// input: cnoneight8rdbdjvjbseight     output: cn1n8ight8rdbdjvjbs8ight  now i have: cn1neight8rdbdjvjbs8ight
 var changeNumbers = function (str) {
-    var changed = str.matchAll(regexLetterDigit);
-    for (var _i = 0, changed_1 = changed; _i < changed_1.length; _i++) {
-        var match = changed_1[_i];
-        console.log(match);
-    }
+    var changed = str.replace(regexLetterDigit, function (match) { return match = replacement[match]; });
     return changed;
 };
 var regexDigits = /\d+/g;
