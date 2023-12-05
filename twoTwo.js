@@ -14,11 +14,13 @@ var heighestNum = /\d+/g;
 var processFile = function (filePath) {
     var fileContent = fs.readFileSync(filePath, 'utf-8');
     var lines = fileContent.split('\n');
+    var multiplied = [];
+    var final = 0;
     var _loop_1 = function (line) {
         var matchesRed = line.match(rgxRed);
         var matchesGreen = line.match(rgxGreen);
         var matchesBlue = line.match(rgxBlue);
-        console.log(matchesBlue);
+        // console.log(matchesBlue);
         var maxNumberRed = 0;
         var maxNumberGreen = 0;
         var maxNumberBlue = 0;
@@ -48,12 +50,16 @@ var processFile = function (filePath) {
             }
             ;
         });
-        console.log(maxNumberBlue);
+        // console.log(maxNumberBlue);
+        multiplied.push(maxNumberRed * maxNumberGreen * maxNumberBlue);
     };
     for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var line = lines_1[_i];
         _loop_1(line);
     }
     ;
+    console.log(multiplied);
+    multiplied.forEach(function (num) { return final += num; });
+    console.log(final);
 };
 processFile(filePath);

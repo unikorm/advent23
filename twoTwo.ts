@@ -21,6 +21,9 @@ const processFile = (filePath: string): void => {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const lines = fileContent.split('\n');
 
+    const multiplied: number[] = [];
+    let final: number = 0;
+
     for (const line of lines) {
         const matchesRed = line.match(rgxRed);
         const matchesGreen = line.match(rgxGreen);
@@ -55,7 +58,13 @@ const processFile = (filePath: string): void => {
             };
         });
         // console.log(maxNumberBlue);
+
+        multiplied.push(maxNumberRed * maxNumberGreen * maxNumberBlue);
     };
+    console.log(multiplied);
+
+    multiplied.forEach(num => final += num);
+    console.log(final);
 };
 
 processFile(filePath);
