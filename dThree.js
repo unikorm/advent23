@@ -4,7 +4,8 @@ var fs = require("fs");
 var filePath = 'inputDayThree.txt';
 // from input from each line retrieve numbers who are adjacent to any symbol but not dot(.)
 // next task is bit more complicated, i need retrieve even number what are adjacent diagonally....
-var regLine = /(?<!\.)(?<number>\d+)(?!\.)/g;
+var regLine = /(?<!\.)\d+(?!\.)/g;
+// /(?<=\D|^)\d+(?=\D|$)(?!\.)/g
 var processFile = function (filePath) {
     var fileContent = fs.readFileSync(filePath, 'utf-8');
     var lines = fileContent.split('\n');
@@ -13,6 +14,10 @@ var processFile = function (filePath) {
         var line = lines_1[_i];
         var matched = line.match(regLine);
         matchedAll === null || matchedAll === void 0 ? void 0 : matchedAll.push(matched);
+        // let match: RegExpExecArray | null;
+        // while ((match = regLine.exec(line)) !== null ) {
+        //     matchedAll.push(match[1]);
+        // };
     }
     ;
     console.log(matchedAll);
