@@ -26,5 +26,39 @@ const processFile = (file: string): void => {
     console.log(finalNumber);
 };
 
-processFile(filePath);
+// processFile(filePath);  // first part
+
+
+// part two
+
+let maxValues: number[] = [];
+let partValue: number = 0;
+let total: number = 0;
+
+const processFilePartTwo = (file: string): void => {
+    const fileContent = fs.readFileSync(file, 'utf-8');
+    const lines = fileContent.split('\n');
+
+    for (const line of lines) {
+        if (!line) {
+            maxValues.push(partValue)
+            partValue = 0;
+        } else {
+            partValue += parseInt(line);
+        }
+    };
+    maxValues.push(partValue);
+    console.log(maxValues);
+
+    const sortedNumbers: number[] = maxValues.sort((a,b) => b - a);
+    const heighestVals: number[] = sortedNumbers.slice(0, 3);
+
+    for (const value of heighestVals) {
+        total += value;
+    }
+
+    console.log(total);
+};
+
+processFilePartTwo(filePath);
 
