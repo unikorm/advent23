@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 
-const filePath: string = '2022/dayThree/input.txt';
+const filePath: string = '2022/dayThree/test.txt';
 
 const processFile = (file: string): void => {
     const fileContent = fs.readFileSync(file, 'utf-8');
@@ -62,24 +62,49 @@ const processFile = (file: string): void => {
         Z: 52
     };
 
-    let totalPriorities: number = 0;
+    // let totalPriorities: number = 0;
+
+    // for (const line of lines) {
+    //     const midpoint: number = Math.floor(line.length / 2);
+    //     const firstHalf: string[] = line.slice(0, midpoint).split('');
+    //     const secondHalf: string[] = line.slice(midpoint).split('');
+    //     // console.log(line, '===>', firstHalf, '+', secondHalf);
+    //     const commonCharacters: string = firstHalf.filter(char => secondHalf.includes(char)).filter((value, index, arr) => arr.indexOf(value) === index).join('');
+    //     // console.log(commonCharacters);
+
+    //     if (values.hasOwnProperty(commonCharacters)) {
+    //         const targetValue: number = values[commonCharacters as keyof typeof values];
+    //         // console.log(targetValue);
+    //         totalPriorities += targetValue;
+    //     };
+    // };
+
+    // console.log(totalPriorities);
+
+    //part two
+    let totalPrioritiesPartTwo: number = 0;
+    let repeat: number = 1;
+    const triple: string[] = [];
 
     for (const line of lines) {
-        const midpoint: number = Math.floor(line.length / 2);
-        const firstHalf: string[] = line.slice(0, midpoint).split('');
-        const secondHalf: string[] = line.slice(midpoint).split('');
-        // console.log(line, '===>', firstHalf, '+', secondHalf);
-        const commonCharacters: string = firstHalf.filter(char => secondHalf.includes(char)).filter((value, index, arr) => arr.indexOf(value) === index).join('');
-        // console.log(commonCharacters);
 
-        if (values.hasOwnProperty(commonCharacters)) {
-            const targetValue: number = values[commonCharacters as keyof typeof values];
-            // console.log(targetValue);
-            totalPriorities += targetValue;
-        };
+        if (repeat <= 3) {
+            const newLine: string[] = line.split('');
+            triple.push(...newLine)
+            repeat += 1;
+        } else {
+            console.log(triple)
+            repeat = 1;
+        }
+
+        const uniqueChar: string[] = [...new Set(triple)];
+        const commonChar = uniqueChar.filter(char => triple.indexOf(char) !== -1);
+        // console.log(uniqueChar, commonChar);
+
+
     };
 
-    console.log(totalPriorities);
+    // console.log(triple, repeat);
 
 };
 
