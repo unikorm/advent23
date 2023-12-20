@@ -1,74 +1,85 @@
 
 import * as fs from 'fs';
 
-const filePath: string = '2022/dayThree/test.txt';
+const filePath: string = '2022/dayThree/input.txt';
 
 const processFile = (file: string): void => {
     const fileContent = fs.readFileSync(file, 'utf-8');
     const lines = fileContent.split('\n');
 
-    const a: number = 1;
-    const b: number = 2;
-    const c: number = 3;
-    const d: number = 4;
-    const e: number = 5;
-    const f: number = 6;
-    const g: number = 7;
-    const h: number = 8;
-    const i: number = 9;
-    const j: number = 10;
-    const k: number = 11;
-    const l: number = 12;
-    const m: number = 13;
-    const n: number = 14;
-    const o: number = 15;
-    const p: number = 16;
-    const q: number = 17;
-    const r: number = 18;
-    const s: number = 19;
-    const t: number = 20;
-    const u: number = 21;
-    const v: number = 22;
-    const w: number = 23;
-    const x: number = 24;
-    const y: number = 25;
-    const z: number = 26;
+    const values = {
+        a: 1,
+        b: 2,
+        c: 3,
+        d: 4,
+        e: 5,
+        f: 6,
+        g: 7,
+        h: 8,
+        i: 9,
+        j: 10,
+        k: 11,
+        l: 12,
+        m: 13,
+        n: 14,
+        o: 15,
+        p: 16,
+        q: 17,
+        r: 18,
+        s: 19,
+        t: 20,
+        u: 21,
+        v: 22,
+        w: 23,
+        x: 24,
+        y: 25,
+        z: 26,
+        A: 27,
+        B: 28,
+        C: 29,
+        D: 30,
+        E: 31,
+        F: 32,
+        G: 33,
+        H: 34,
+        I: 35,
+        J: 36,
+        K: 37,
+        L: 38,
+        M: 39,
+        N: 40,
+        O: 41,
+        P: 42,
+        Q: 43,
+        R: 44,
+        S: 45,
+        T: 46,
+        U: 47,
+        V: 48,
+        W: 49,
+        X: 50,
+        Y: 51,
+        Z: 52
+    };
 
-    const A: number = 27;
-    const B: number = 28;
-    const C: number = 29;
-    const D: number = 30;
-    const E: number = 31;
-    const F: number = 32;
-    const G: number = 33;
-    const H: number = 34;
-    const I: number = 35;
-    const J: number = 36;
-    const K: number = 37;
-    const L: number = 38;
-    const M: number = 39;
-    const N: number = 40;
-    const O: number = 41;
-    const P: number = 42;
-    const Q: number = 43;
-    const R: number = 44;
-    const S: number = 45;
-    const T: number = 46;
-    const U: number = 47;
-    const V: number = 48;
-    const W: number = 49;
-    const X: number = 50;
-    const Y: number = 51;
-    const Z: number = 52;
-
-    const totalPriorities: number = 0;
+    let totalPriorities: number = 0;
 
     for (const line of lines) {
         const midpoint: number = Math.floor(line.length / 2);
-        const firstHalf: string = line.slice(0, midpoint);
-        const secondHalf: string = line.slice(midpoint);
+        const firstHalf: string[] = line.slice(0, midpoint).split('');
+        const secondHalf: string[] = line.slice(midpoint).split('');
         // console.log(line, '===>', firstHalf, '+', secondHalf);
+        const commonCharacters: string = firstHalf.filter(char => secondHalf.includes(char)).filter((value, index, arr) => arr.indexOf(value) === index).join('');
+        // console.log(commonCharacters);
+
+        if (values.hasOwnProperty(commonCharacters)) {
+            const targetValue: number = values[commonCharacters as keyof typeof values];
+            // console.log(targetValue);
+            totalPriorities += targetValue;
+        };
     };
+
+    console.log(totalPriorities);
 
 };
 
