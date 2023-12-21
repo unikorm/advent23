@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 
-const filePath: string = '2022/dayThree/test.txt';
+const filePath: string = '2022/dayThree/input.txt';
 
 const processFile = (file: string): void => {
     const fileContent = fs.readFileSync(file, 'utf-8');
@@ -83,28 +83,25 @@ const processFile = (file: string): void => {
 
     //part two
     let totalPrioritiesPartTwo: number = 0;
-    let repeat: number = 1;
-    const triple: string[] = [];
+    let triple: string[] = [];
 
-    for (const line of lines) {
-
-        if (repeat <= 3) {
-            const newLine: string[] = line.split('');
-            triple.push(...newLine)
-            repeat += 1;
-        } else {
-            console.log(triple)
-            repeat = 1;
-        }
-
-        const uniqueChar: string[] = [...new Set(triple)];
-        const commonChar = uniqueChar.filter(char => triple.indexOf(char) !== -1);
-        // console.log(uniqueChar, commonChar);
-
-
+    for (let i = 0; i < lines.length; i += 3) {
+        triple = lines.slice(i, i + 3);
+        // console.log(triple, 'in loop');
+        const commonChars: Set<string> = triple.reduce((result, actualString): Set<string> => {
+            const currentChars = new Set(actualString);
+            return new Set([...result].filter(char => currentChars.has(char)));
+        }, new Set(triple[0]))
+        const letter: string = Array.from(commonChars).join('');
+        if (values.hasOwnProperty(letter)) {
+            const targetValue: number = values[letter as keyof typeof values];
+            // console.log(targetValue);
+            totalPrioritiesPartTwo += targetValue;
+        };
     };
 
-    // console.log(triple, repeat);
+
+    console.log(totalPrioritiesPartTwo, 'at the end');
 
 };
 
