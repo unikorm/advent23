@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 
-const filePath: string = '2022/dayFour/test.txt';
+const filePath: string = '2022/dayFour/input.txt';
 
 const processFile = (file: string): void => {
     const fileContent = fs.readFileSync(file, 'utf-8');
@@ -28,10 +28,26 @@ const processFile = (file: string): void => {
             lineTwo.push(j);
         };
 
+        if (lineOne.length >= lineTwo.length) {
+            const contain: boolean = lineTwo.every(value => lineOne.includes(value));
+            // console.log(contain);
+            if (contain) {
+                totalFullContaining += 1;
+            };
+        } else if (lineOne.length < lineTwo.length) {
+            const contain: boolean = lineOne.every(value => lineTwo.includes(value));
+            // console.log(contain);
+            if (contain) {
+                totalFullContaining += 1;
+            };
+        };
 
-        console.log(lineTwo);
+
+        // console.log(lineTwo);
         
     };
+
+    console.log(totalFullContaining);
 
 };
 
