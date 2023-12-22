@@ -29,13 +29,13 @@ const processFile = (file: string): void => {
         };
 
         if (lineOne.length >= lineTwo.length) {
-            const contain: boolean = lineTwo.every(value => lineOne.includes(value));
+            const contain: boolean = lineTwo.some(value => lineOne.includes(value));
             // console.log(contain);
             if (contain) {
                 totalFullContaining += 1;
             };
         } else if (lineOne.length < lineTwo.length) {
-            const contain: boolean = lineOne.every(value => lineTwo.includes(value));
+            const contain: boolean = lineOne.some(value => lineTwo.includes(value));
             // console.log(contain);
             if (contain) {
                 totalFullContaining += 1;
