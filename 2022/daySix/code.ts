@@ -17,7 +17,7 @@ const processFile = (file: string): void => {
     for (let char of line) {
         value += char;
         point += 1;
-        if (value.length === 4) {
+        if (value.length === 14) {
             let marker = value;
             if (hasUniqueChar(marker)) {
                 console.log(marker, point);
